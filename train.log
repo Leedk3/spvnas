@@ -1,0 +1,55 @@
+Failed to import tensorflow.
+[32m[2021-08-03 11:40:21.902][0m [1m/usr/bin/python3 train.py configs/semantic_kitti/spvcnn/cr0p5.yaml[0m
+[32m[2021-08-03 11:40:21.902][0m [1mExperiment started: "runs/run-3054cc1f-317038c9".
+workers_per_gpu: 8
+data:
+  num_classes: 19
+  ignore_label: 255
+  training_size: 19132
+train:
+  seed: 1588147245
+  deterministic: False
+dataset:
+  name: semantic_kitti
+  root: /dataset/semantic-kitti
+  num_points: 80000
+  voxel_size: 0.05
+num_epochs: 15
+batch_size: 2
+criterion:
+  name: cross_entropy
+  ignore_index: 255
+optimizer:
+  name: sgd
+  lr: 0.24
+  weight_decay: 0.0001
+  momentum: 0.9
+  nesterov: True
+scheduler:
+  name: cosine_warmup
+model:
+  name: spvcnn
+  cr: 0.5[0m
+Traceback (most recent call last):
+  File "train.py", line 106, in <module>
+    main()
+  File "train.py", line 55, in main
+    dataset = builder.make_dataset()
+  File "/home/usrg/spvnas/core/builder.py", line 20, in make_dataset
+    voxel_size=configs.dataset.voxel_size)
+  File "/home/usrg/spvnas/core/datasets/semantic_kitti.py", line 86, in __init__
+    google_mode=google_mode),
+  File "/home/usrg/spvnas/core/datasets/semantic_kitti.py", line 133, in __init__
+    os.listdir(os.path.join(self.root, seq, 'velodyne')))
+FileNotFoundError: [Errno 2] No such file or directory: '/dataset/semantic-kitti/00/velodyne'
+-------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code.. Per user-direction, the job has been aborted.
+-------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[6398,1],0]
+  Exit code:    1
+--------------------------------------------------------------------------

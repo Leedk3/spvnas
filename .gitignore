@@ -1,1 +1,7 @@
 .vscode/
+
+runs/
+__pycache__/
+.torch/
+.ipynb_checkpoints/
+torchsparse/
